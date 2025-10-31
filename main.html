@@ -8,6 +8,28 @@
 
 <body>
 	<!-- the entire body must be written by student -->
+	<h2>Dynamic Shopping List</h2>
+	<label for="item-name-input">Item Name:</label>
+	<input type="text" id="item-name-input" aria-label="Item name input" placeholder="Enter item name" />
+
+    <label for="item-price-input">Price:</label>
+    <input type="number" id="item-price-input" aria-label="Item price input" placeholder="Enter item price" />
+
+    <button id="add" aria-label="Add item to shopping list">Add</button>
+
+    <table aria-role="table" id="shopping-table">
+		<thead>
+			<tr>
+				<th id="item-header">Item</th>
+                <th id="price-header">Price ($)</th>
+			</tr>
+		</thead>
+		<tbody id="table-body" aria-role="rowgroup">
+			
+		</tbody>
+	</table>
+	
+	<h3 id="total" aria-role="status">Grand Total: $0.00</h3>
     <script type="text/javascript" src="./script.js">
 </script>
 

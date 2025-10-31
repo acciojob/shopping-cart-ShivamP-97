@@ -1,6 +1,6 @@
-//your code here
 const addBtn = document.getElementById("add");
 const itemInput = document.getElementById("item-name-input");
+const qtyInput = document.getElementById("item-qty-input");
 const priceInput = document.getElementById("item-price-input");
 const tableBody = document.getElementById("table-body");
 const totalDisplay = document.getElementById("total");
@@ -12,35 +12,34 @@ function updateTotal() {
 }
 
 function addItem() {
-  const itemName = itemInput.value.trim();
-  const itemPrice = parseFloat(priceInput.value);
+  const name = itemInput.value.trim();
+  const qty = parseInt(qtyInput.value);
+  const price = parseFloat(priceInput.value);
 
-  if (itemName === "" || isNaN(itemPrice) || itemPrice <= 0) {
-    alert("Please enter a valid item name and price greater than 0.");
+  if (name === "" || isNaN(qty) || qty <= 0 || isNaN(price) || price <= 0) {
+    alert("Please enter valid item name, quantity, and price greater than 0.");
     return;
   }
+
+  const total = qty * price;
 
   const row = document.createElement("tr");
   row.setAttribute("aria-role", "row");
 
-  const itemCell = document.createElement("td");
-  itemCell.id = "item";
-  itemCell.setAttribute("aria-role", "cell");
-  itemCell.textContent = itemName;
+  row.innerHTML = `
+    <td id="item" aria-role="cell">${name}</td>
+    <td aria-role="cell">${qty}</td>
+    <td id="price" aria-role="cell">$${price.toFixed(2)}</td>
+    <td aria-role="cell">$${total.toFixed(2)}</td>
+  `;
 
-  const priceCell = document.createElement("td");
-  priceCell.id = "price";
-  priceCell.setAttribute("aria-role", "cell");
-  priceCell.textContent = `$${itemPrice.toFixed(2)}`;
-
-  row.appendChild(itemCell);
-  row.appendChild(priceCell);
   tableBody.appendChild(row);
 
-  grandTotal += itemPrice;
+  grandTotal += total;
   updateTotal();
 
   itemInput.value = "";
+  qtyInput.value = "";
   priceInput.value = "";
   itemInput.focus();
 }
